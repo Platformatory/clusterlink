@@ -8,9 +8,9 @@ destinationCluster: {}
   #   type: plain
   #   jaasConfig:
   #     secretRef: credential
-  # tls:
-  #   enabled: true
-  #   secretRef: source-tls-group1
+  #   tls:
+  #     enabled: true
+  #     secretRef: source-tls-group1
 
 sourceCluster: {}
   # kafkaRestClass:
@@ -46,3 +46,15 @@ mirrorTopics: []
   #   replicationFactor: 3
   #   sourceTopicName: demo
   #   state: "ACTIVE"
+
+mirrorTopicOptions: {}
+  # autoCreateTopics:
+  #   enabled: true
+  #   topicFilters:
+  #     - name: foo
+  #       filterType: EXCLUDE
+  #       patternType: LITERAL
+  # prefix: test
+
+sourceInitiatedLink: {}
+  # linkMode: "Source"

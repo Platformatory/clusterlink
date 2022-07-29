@@ -165,11 +165,67 @@
                 "consumerGroupFilters": {
                     "type": "array",
                     "items": {
-                        "type": "object"
+                        "type": "object",
+                        "properties": {
+                            "name" : {"type": "string" },
+                            "patternType" : {"type": "string", "pattern": "^(PREFIXED|LITERAL)$" },
+                            "filterType" : {"type": "string", "pattern": "^(INCLUDE|EXCLUDE)$" }
+                        },
+                        "required": ["name", "patternType", "filterType"]
+                    }
+                },
+                "aclFilters": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "accessFilter" : {
+                                "type": "object",
+                                "properties": {
+                                    "host" : {"type": "string" },
+                                    "operation" : {"type": "string" },
+                                    "permissionType" : {"type": "string", "pattern": "^(any|allow|deny)$" },
+                                    "principal" : {"type": "string" }
+                                },
+                                "required": ["operation", "permissionType"]
+                            },
+                            "resourceFilter" : {
+                                "type": "object",
+                                "properties": {
+                                    "name" : {"type": "string" },
+                                    "patternType" : {"type": "string", "pattern": "^(prefixed|literal|any|match)$" },
+                                    "resourceType" : {"type": "string", "pattern": "^(any|cluster|group|topic|transactionId|delegationToken)$" }
+                                },
+                                "required": ["patternType", "resourceType"]
+                            }
+                        },
+                        "required": ["accessFilter", "resourceFilter"]
                     }
                 },
                 "configs": {
                     "type": "object"
+                },
+                "mirrorTopicOptions": {
+                    "type": "object",
+                    "items": {
+                        "prefix": {
+                            "type": "string"
+                        },
+                        "autoCreateTopics": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {"type": "boolean"},
+                                "topicFilters": {
+                                    "type": "array",
+                                    "name" : {"type": "string" },
+                                    "patternType" : {"type": "string", "pattern": "^(PREFIXED|LITERAL)$" },
+                                    "filterType" : {"type": "string", "pattern": "^(INCLUDE|EXCLUDE)$" }
+                                },
+                                "required": ["patternType", "filterType", "name"]
+                                }
+                            }
+                        }
+                    }
                 },
                 "mirrorTopics": {
                     "type": "array",
@@ -190,18 +246,20 @@
                             },
                             "state": {
                                 "type": "string",
-                                "enum": [
-                                    "ACTIVE",
-                                    "FAILOVER",
-                                    "PAUSE",
-                                    "PROMOTE"
-                                ]
+                                "pattern": "^(ACTIVE|FAILOVER|PAUSE|PROMOTE)$"
                             }
                         },
                         "required": [
                             "name"
                         ]
                     }
+                },
+                "sourceInitiatedLink": {
+                    "type": "object",
+                    "properties": {
+                        "linkMode": {"type": "string", "pattern": "^(Source|Destination)$"}
+                    },
+                    "required": "linkMode"
                 }
             }
         }

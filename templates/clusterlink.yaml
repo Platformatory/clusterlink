@@ -49,19 +49,28 @@ spec:
     tls:
       {{- toYaml .Values.sourceCluster.tls | nindent 6 }}
     {{- end }}
-  {{ if .Values.consumerGroupFilters -}}
+  {{- if .Values.consumerGroupFilters }}
   consumerGroupFilters:
     {{- toYaml .Values.consumerGroupFilters | nindent 4 }}
   {{- end }}
-  {{ if .Values.aclFilters -}}
+  {{- if .Values.aclFilters }}
   aclFilters:
     {{- toYaml .Values.aclFilters | nindent 4 }}
   {{- end }}
-  {{ if .Values.mirrorTopics -}}
+  {{- if .Values.mirrorTopics }}
   mirrorTopics:
     {{- toYaml .Values.mirrorTopics | nindent 4 }}
-  {{- end -}}
+  {{- end }}
+  {{- if .Values.mirrorTopicOptions }}
+  mirrorTopicOptions:
+    {{- toYaml .Values.mirrorTopicOptions | nindent 4 }}
+  {{- end }}
+  {{- if .Values.sourceInitiatedLink }}
+  sourceInitiatedLink:
+    {{- toYaml .Values.sourceInitiatedLink | nindent 4 }}
+  {{- end }}
   {{- if .Values.configs }}
   configs:
     {{- include "clusterlink.configs" . | nindent 4 }}
   {{- end }}
+  
