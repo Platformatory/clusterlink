@@ -23,10 +23,10 @@
                         "name"
                     ]
                 },
-                "boostrapEndpoint": {
+                "bootstrapEndpoint": {
                     "type": "string"
                 },
-                "clusterId": {
+                "clusterID": {
                     "type": "string"
                 },
                 "authentication": {
@@ -101,10 +101,10 @@
                             "name"
                         ]
                     },
-                    "boostrapEndpoint": {
+                    "bootstrapEndpoint": {
                         "type": "string"
                     },
-                    "clusterId": {
+                    "clusterID": {
                         "type": "string"
                     },
                     "authentication": {

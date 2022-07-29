@@ -6,11 +6,11 @@ metadata:
     {{- include "clusterlink.labels" . | nindent 4 }}
 spec:
   destinationKafkaCluster:
-    {{- if .Values.destinationCluster.boostrapEndpoint }}
-    boostrapEndpoint: "{{ .Values.destinationCluster.boostrapEndpoint }}"
+    {{- if .Values.destinationCluster.bootstrapEndpoint }}
+    bootstrapEndpoint: "{{ .Values.destinationCluster.bootstrapEndpoint }}"
     {{- end }}
-    {{- if .Values.destinationCluster.clusterId }}
-    clusterId: "{{ .Values.destinationCluster.clusterId }}"
+    {{- if .Values.destinationCluster.clusterID }}
+    clusterID: "{{ .Values.destinationCluster.clusterID }}"
     {{- end }}
     {{- if .Values.destinationCluster.kafkaRestClass }}
     kafkaRestClassRef:
@@ -28,11 +28,11 @@ spec:
       {{- toYaml .Values.destinationCluster.tls | nindent 6 }}
     {{- end }}
   sourceKafkaCluster:
-    {{- if .Values.sourceCluster.boostrapEndpoint }}
-    boostrapEndpoint: "{{ .Values.sourceCluster.boostrapEndpoint }}"
+    {{- if .Values.sourceCluster.bootstrapEndpoint }}
+    bootstrapEndpoint: "{{ .Values.sourceCluster.bootstrapEndpoint }}"
     {{- end }}
-    {{- if .Values.sourceCluster.clusterId }}
-    clusterId: "{{ .Values.sourceCluster.clusterId }}"
+    {{- if .Values.sourceCluster.clusterID }}
+    clusterID: "{{ .Values.sourceCluster.clusterID }}"
     {{- end }}
     {{- if .Values.sourceCluster.kafkaRestClass }}
     kafkaRestClassRef:
