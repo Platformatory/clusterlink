@@ -2,7 +2,7 @@ destinationCluster: {}
   # kafkaRestClass:
   #   name: krc-example
   #   namespace: test
-  # boostrapEndpoint: example.com:9092
+  # bootstrapEndpoint: example.com:9092
   # clusterId: test_kafka_cluster_id
   # authentication:
   #   type: plain

@@ -23,7 +23,7 @@
                         "name"
                     ]
                 },
-                "boostrapEndpoint": {
+                "bootstrapEndpoint": {
                     "type": "string"
                 },
                 "clusterId": {

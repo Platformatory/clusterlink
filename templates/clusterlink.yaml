@@ -10,7 +10,7 @@ spec:
     boostrapEndpoint: "{{ .Values.destinationCluster.boostrapEndpoint }}"
     {{- end }}
     {{- if .Values.destinationCluster.clusterId }}
-    clusterId: "{{ .Values.destinationCluster.clusterId }}"
+    clusterID: "{{ .Values.destinationCluster.clusterId }}"
     {{- end }}
     {{- if .Values.destinationCluster.kafkaRestClass }}
     kafkaRestClassRef:
@@ -32,7 +32,7 @@ spec:
     boostrapEndpoint: "{{ .Values.sourceCluster.boostrapEndpoint }}"
     {{- end }}
     {{- if .Values.sourceCluster.clusterId }}
-    clusterId: "{{ .Values.sourceCluster.clusterId }}"
+    clusterID: "{{ .Values.sourceCluster.clusterId }}"
     {{- end }}
     {{- if .Values.sourceCluster.kafkaRestClass }}
     kafkaRestClassRef:
