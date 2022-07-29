@@ -2,25 +2,207 @@
     "type": "object",
     "$schema": "https://json-schema.org/schema#",
     "required": [
-        "destinationCluster"
+        "destinationCluster",
+        "sourceCluster"
     ],
     "properties": {
         "destinationCluster": {
             "type": "object",
             "properties": {
-              "kafkaRestClass": { 
+                "kafkaRestClass": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "namespace": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                },
+                "boostrapEndpoint": {
+                    "type": "string"
+                },
+                "clusterId": {
+                    "type": "string"
+                },
+                "authentication": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "plain",
+                                "oauthbearer",
+                                "digest",
+                                "mtls"
+                            ]
+                        },
+                        "jaasConfig": {
+                            "type": "object"
+                        },
+                        "jaasConfigPassThrough": {
+                            "type": "object"
+                        },
+                        "oauthbearer": {
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                "tls": {
+                    "type": "object",
+                    "properties": {
+                        "directoryPathInContainer": {
+                            "type": "string"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "keyPassword": {
+                            "type": "object",
+                            "properties": {
+                                "secretRef": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "secretRef"
+                            ]
+                        },
+                        "secretRef": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "enabled"
+                    ]
+                }
+            },
+            "sourceCluster": {
                 "type": "object",
                 "properties": {
-                    "name": { "type": "string" },
-                    "namespace": { "type": "string" }
+                    "kafkaRestClass": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "namespace": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "boostrapEndpoint": {
+                        "type": "string"
+                    },
+                    "clusterId": {
+                        "type": "string"
+                    },
+                    "authentication": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "plain",
+                                    "oauthbearer",
+                                    "digest",
+                                    "mtls"
+                                ]
+                            },
+                            "jaasConfig": {
+                                "type": "object"
+                            },
+                            "jaasConfigPassThrough": {
+                                "type": "object"
+                            },
+                            "oauthbearer": {
+                                "type": "object"
+                            }
+                        },
+                        "required": [
+                            "type"
+                        ]
+                    },
+                    "tls": {
+                        "type": "object",
+                        "properties": {
+                            "directoryPathInContainer": {
+                                "type": "string"
+                            },
+                            "enabled": {
+                                "type": "boolean"
+                            },
+                            "keyPassword": {
+                                "type": "object",
+                                "properties": {
+                                    "secretRef": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "secretRef"
+                                ]
+                            },
+                            "secretRef": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "enabled"
+                        ]
+                    }
+                },
+                "consumerGroupFilters": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "configs": {
+                    "type": "object"
+                },
+                "mirrorTopics": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "config": {
+                                "type": "object"
+                            },
+                            "replicationFactor": {
+                                "type": "integer"
+                            },
+                            "sourceTopicName": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string",
+                                "enum": [
+                                    "ACTIVE",
+                                    "FAILOVER",
+                                    "PAUSE",
+                                    "PROMOTE"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "name"
+                        ]
+                    }
                 }
-              }
-            }
-          },
-          "consumerGroupFilters": { 
-            "type": "array", 
-            "items": { 
-                "type": "object"
             }
         }
     }

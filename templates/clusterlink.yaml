@@ -6,11 +6,49 @@ metadata:
     {{- include "clusterlink.labels" . | nindent 4 }}
 spec:
   destinationKafkaCluster:
+    {{- if .Values.destinationCluster.boostrapEndpoint }}
+    boostrapEndpoint: "{{ .Values.destinationCluster.boostrapEndpoint }}"
+    {{- end }}
+    {{- if .Values.destinationCluster.clusterId }}
+    clusterId: "{{ .Values.destinationCluster.clusterId }}"
+    {{- end }}
+    {{- if .Values.destinationCluster.kafkaRestClass }}
     kafkaRestClassRef:
       name: {{ .Values.destinationCluster.kafkaRestClass.name }}
+      {{- if .Values.destinationCluster.kafkaRestClass.namespace }}
+      namespace: {{ .Values.destinationCluster.kafkaRestClass.namespace }}
+      {{- end }}
+    {{- end }}
+    {{- if .Values.destinationCluster.authentication }}
+    authentication:
+      {{- toYaml .Values.destinationCluster.authentication | nindent 6 }}
+    {{- end }}
+    {{- if .Values.destinationCluster.tls }}
+    tls:
+      {{- toYaml .Values.destinationCluster.tls | nindent 6 }}
+    {{- end }}
   sourceKafkaCluster:
-    bootstrapEndpoint: {{ .Values.sourceCluster.boostrapEndpoint }}
-    clusterID: {{ .Values.sourceCluster.clusterId }}
+    {{- if .Values.sourceCluster.boostrapEndpoint }}
+    boostrapEndpoint: "{{ .Values.sourceCluster.boostrapEndpoint }}"
+    {{- end }}
+    {{- if .Values.sourceCluster.clusterId }}
+    clusterId: "{{ .Values.sourceCluster.clusterId }}"
+    {{- end }}
+    {{- if .Values.sourceCluster.kafkaRestClass }}
+    kafkaRestClassRef:
+      name: {{ .Values.sourceCluster.kafkaRestClass.name }}
+      {{- if .Values.sourceCluster.kafkaRestClass.namespace }}
+      namespace: {{ .Values.sourceCluster.kafkaRestClass.namespace }}
+      {{- end }}
+    {{- end }}
+    {{- if .Values.sourceCluster.authentication }}
+    authentication:
+      {{- toYaml .Values.sourceCluster.authentication | nindent 6 }}
+    {{- end }}
+    {{- if .Values.sourceCluster.tls }}
+    tls:
+      {{- toYaml .Values.sourceCluster.tls | nindent 6 }}
+    {{- end }}
   {{ if .Values.consumerGroupFilters -}}
   consumerGroupFilters:
     {{- toYaml .Values.consumerGroupFilters | nindent 4 }}
@@ -23,7 +61,7 @@ spec:
   mirrorTopics:
     {{- toYaml .Values.mirrorTopics | nindent 4 }}
   {{- end -}}
-  {{- if .Values.configs -}}
+  {{- if .Values.configs }}
   configs:
     {{- include "clusterlink.configs" . | nindent 4 }}
   {{- end }}
