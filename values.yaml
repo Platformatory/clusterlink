@@ -1,0 +1,15 @@
+destinationCluster:
+  kafkaRestClass: krc-example
+
+sourceCluster:
+  boostrapEndpoint: example.com:9092
+  clusterId: test_kafka_cluster_id
+
+consumerGroupFilters:
+  - name: filter-example
+    patternType: LITERAL
+    filterType: INCLUDE
+
+configs:
+  connections.max.idle.ms: "620000"
+  cluster.link.retry.timeout.ms: "320000"

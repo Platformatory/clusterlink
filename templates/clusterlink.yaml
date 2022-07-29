@@ -1,0 +1,27 @@
+apiVersion: platform.confluent.io/v1beta1
+kind: ClusterLink
+metadata:
+  name: {{ include "clusterlink.fullname" . }}
+  labels:
+    {{- include "clusterlink.labels" . | nindent 4 }}
+spec:
+  destinationKafkaCluster:
+    kafkaRestClassRef:
+      name: {{ .Values.destinationCluster.kafkaRestClass }}
+  sourceKafkaCluster:
+    bootstrapEndpoint:  {{ .Values.sourceCluster.boostrapEndpoint }}
+    clusterID: {{ .Values.sourceCluster.clusterId }}
+  consumerGroupFilters:
+    {{- toYaml .Values.consumerGroupFilters | nindent 4 }}
+  aclFilters:
+      - resourceFilter:
+          resourceType: topic
+          name: coffee
+          patternType: prefixed
+        accessFilter:
+          principal: User:Bob
+          host: example .com
+          operation: read
+          permissionType: allow
+  configs:
+    {{- include "clusterlink.configs" . | nindent 4 }}
