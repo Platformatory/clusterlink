@@ -6,8 +6,8 @@ metadata:
     {{- include "clusterlink.labels" . | nindent 4 }}
 spec:
   destinationKafkaCluster:
-    {{- if .Values.destinationCluster.boostrapEndpoint }}
-    boostrapEndpoint: "{{ .Values.destinationCluster.boostrapEndpoint }}"
+    {{- if .Values.destinationCluster.bootstrapEndpoint }}
+    bootstrapEndpoint: "{{ .Values.destinationCluster.bootstrapEndpoint }}"
     {{- end }}
     {{- if .Values.destinationCluster.clusterId }}
     clusterID: "{{ .Values.destinationCluster.clusterId }}"
@@ -28,8 +28,8 @@ spec:
       {{- toYaml .Values.destinationCluster.tls | nindent 6 }}
     {{- end }}
   sourceKafkaCluster:
-    {{- if .Values.sourceCluster.boostrapEndpoint }}
-    boostrapEndpoint: "{{ .Values.sourceCluster.boostrapEndpoint }}"
+    {{- if .Values.sourceCluster.bootstrapEndpoint }}
+    bootstrapEndpoint: "{{ .Values.sourceCluster.bootstrapEndpoint }}"
     {{- end }}
     {{- if .Values.sourceCluster.clusterId }}
     clusterID: "{{ .Values.sourceCluster.clusterId }}"
