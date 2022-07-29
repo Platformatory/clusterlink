@@ -9,8 +9,8 @@ spec:
     {{- if .Values.destinationCluster.bootstrapEndpoint }}
     bootstrapEndpoint: "{{ .Values.destinationCluster.bootstrapEndpoint }}"
     {{- end }}
-    {{- if .Values.destinationCluster.clusterId }}
-    clusterID: "{{ .Values.destinationCluster.clusterId }}"
+    {{- if .Values.destinationCluster.clusterID }}
+    clusterID: "{{ .Values.destinationCluster.clusterID }}"
     {{- end }}
     {{- if .Values.destinationCluster.kafkaRestClass }}
     kafkaRestClassRef:
@@ -31,8 +31,8 @@ spec:
     {{- if .Values.sourceCluster.bootstrapEndpoint }}
     bootstrapEndpoint: "{{ .Values.sourceCluster.bootstrapEndpoint }}"
     {{- end }}
-    {{- if .Values.sourceCluster.clusterId }}
-    clusterID: "{{ .Values.sourceCluster.clusterId }}"
+    {{- if .Values.sourceCluster.clusterID }}
+    clusterID: "{{ .Values.sourceCluster.clusterID }}"
     {{- end }}
     {{- if .Values.sourceCluster.kafkaRestClass }}
     kafkaRestClassRef:
@@ -49,28 +49,19 @@ spec:
     tls:
       {{- toYaml .Values.sourceCluster.tls | nindent 6 }}
     {{- end }}
-  {{- if .Values.consumerGroupFilters }}
+  {{ if .Values.consumerGroupFilters -}}
   consumerGroupFilters:
     {{- toYaml .Values.consumerGroupFilters | nindent 4 }}
   {{- end }}
-  {{- if .Values.aclFilters }}
+  {{ if .Values.aclFilters -}}
   aclFilters:
     {{- toYaml .Values.aclFilters | nindent 4 }}
   {{- end }}
-  {{- if .Values.mirrorTopics }}
+  {{ if .Values.mirrorTopics -}}
   mirrorTopics:
     {{- toYaml .Values.mirrorTopics | nindent 4 }}
-  {{- end }}
-  {{- if .Values.mirrorTopicOptions }}
-  mirrorTopicOptions:
-    {{- toYaml .Values.mirrorTopicOptions | nindent 4 }}
-  {{- end }}
-  {{- if .Values.sourceInitiatedLink }}
-  sourceInitiatedLink:
-    {{- toYaml .Values.sourceInitiatedLink | nindent 4 }}
-  {{- end }}
+  {{- end -}}
   {{- if .Values.configs }}
   configs:
     {{- include "clusterlink.configs" . | nindent 4 }}
   {{- end }}
-  
