@@ -13,3 +13,10 @@ consumerGroupFilters:
 configs:
   connections.max.idle.ms: "620000"
   cluster.link.retry.timeout.ms: "320000"
+
+mirrorTopics:
+  - name: testTopic
+  - name: demo
+    replicationFactor: 3
+    sourceTopicName: demo
+    state: "ACTIVE"

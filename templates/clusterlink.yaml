@@ -9,7 +9,7 @@ spec:
     kafkaRestClassRef:
       name: {{ .Values.destinationCluster.kafkaRestClass }}
   sourceKafkaCluster:
-    bootstrapEndpoint:  {{ .Values.sourceCluster.boostrapEndpoint }}
+    bootstrapEndpoint: {{ .Values.sourceCluster.boostrapEndpoint }}
     clusterID: {{ .Values.sourceCluster.clusterId }}
   consumerGroupFilters:
     {{- toYaml .Values.consumerGroupFilters | nindent 4 }}
@@ -23,5 +23,9 @@ spec:
           host: example .com
           operation: read
           permissionType: allow
+  {{ if .Values.mirrorTopics -}}
+  mirrorTopics:
+    {{- toYaml .Values.mirrorTopics | nindent 4 }}
+  {{- end }}
   configs:
     {{- include "clusterlink.configs" . | nindent 4 }}
