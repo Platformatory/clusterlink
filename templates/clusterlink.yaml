@@ -7,25 +7,23 @@ metadata:
 spec:
   destinationKafkaCluster:
     kafkaRestClassRef:
-      name: {{ .Values.destinationCluster.kafkaRestClass }}
+      name: {{ .Values.destinationCluster.kafkaRestClass.name }}
   sourceKafkaCluster:
     bootstrapEndpoint: {{ .Values.sourceCluster.boostrapEndpoint }}
     clusterID: {{ .Values.sourceCluster.clusterId }}
+  {{ if .Values.consumerGroupFilters -}}
   consumerGroupFilters:
     {{- toYaml .Values.consumerGroupFilters | nindent 4 }}
+  {{- end }}
+  {{ if .Values.aclFilters -}}
   aclFilters:
-      - resourceFilter:
-          resourceType: topic
-          name: coffee
-          patternType: prefixed
-        accessFilter:
-          principal: User:Bob
-          host: example .com
-          operation: read
-          permissionType: allow
+    {{- toYaml .Values.aclFilters | nindent 4 }}
+  {{- end }}
   {{ if .Values.mirrorTopics -}}
   mirrorTopics:
     {{- toYaml .Values.mirrorTopics | nindent 4 }}
-  {{- end }}
+  {{- end -}}
+  {{- if .Values.configs -}}
   configs:
     {{- include "clusterlink.configs" . | nindent 4 }}
+  {{- end }}

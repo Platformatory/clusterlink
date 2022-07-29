@@ -8,7 +8,13 @@
         "destinationCluster": {
             "type": "object",
             "properties": {
-              "kafkaRestClass": { "type": "string" }
+              "kafkaRestClass": { 
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string" },
+                    "namespace": { "type": "string" }
+                }
+              }
             }
           },
           "consumerGroupFilters": { 

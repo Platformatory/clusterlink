@@ -1,22 +1,41 @@
 destinationCluster:
-  kafkaRestClass: krc-example
-
-sourceCluster:
+  kafkaRestClass:
+    name: krc-example
+    namespace: test
   boostrapEndpoint: example.com:9092
   clusterId: test_kafka_cluster_id
 
-consumerGroupFilters:
-  - name: filter-example
-    patternType: LITERAL
-    filterType: INCLUDE
+sourceCluster:
+  kafkaRestClass:
+    name: krc-example
+    namespace: test
+  boostrapEndpoint: example.com:9092
+  clusterId: test_kafka_cluster_id
+  
 
-configs:
-  connections.max.idle.ms: "620000"
-  cluster.link.retry.timeout.ms: "320000"
+consumerGroupFilters: {}
+  # - name: filter-example
+  #   patternType: LITERAL
+  #   filterType: INCLUDE
 
-mirrorTopics:
-  - name: testTopic
-  - name: demo
-    replicationFactor: 3
-    sourceTopicName: demo
-    state: "ACTIVE"
+configs: {}
+  # connections.max.idle.ms: "620000"
+  # cluster.link.retry.timeout.ms: "320000"
+
+aclFilters: {}
+  # - resourceFilter:
+  #     resourceType: topic
+  #     name: coffee
+  #     patternType: prefixed
+  #   accessFilter:
+  #     principal: User:Bob
+  #     host: example .com
+  #     operation: read
+  #     permissionType: allow
+
+mirrorTopics: {}
+  # - name: testTopic
+  # - name: demo
+  #   replicationFactor: 3
+  #   sourceTopicName: demo
+  #   state: "ACTIVE"
