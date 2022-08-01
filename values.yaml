@@ -12,7 +12,7 @@ destinationCluster: {}
   #     enabled: true
   #     secretRef: source-tls-group1
 
-sourceCluster: {}
+sourceCluster:
   # kafkaRestClass:
   #   name: krc-example
   #   namespace: test
@@ -20,16 +20,16 @@ sourceCluster: {}
   # clusterId: test_kafka_cluster_id
 
 
-consumerGroupFilters: []
-  # - name: filter-example
-  #   patternType: LITERAL
-  #   filterType: INCLUDE
+# consumerGroupFilters:
+#   - name: filter-example
+#     patternType: LITERAL
+#     filterType: INCLUDE
 
 # configs:
   # connections.max.idle.ms: "620000"
   # cluster.link.retry.timeout.ms: "320000"
 
-aclFilters: []
+# aclFilters:
   # - resourceFilter:
   #     resourceType: topic
   #     name: coffee
@@ -40,14 +40,14 @@ aclFilters: []
   #     operation: read
   #     permissionType: allow
 
-mirrorTopics: []
+# mirrorTopics:
   # - name: testTopic
   # - name: demo
   #   replicationFactor: 3
   #   sourceTopicName: demo
   #   state: "ACTIVE"
 
-mirrorTopicOptions: {}
+# mirrorTopicOptions:
   # autoCreateTopics:
   #   enabled: true
   #   topicFilters:
@@ -56,7 +56,7 @@ mirrorTopicOptions: {}
   #       patternType: LITERAL
   # prefix: test
 
-sourceInitiatedLink:
-  linkMode: "Source"
+# sourceInitiatedLink:
+#   linkMode: "Source"
 
 # clusterLinkName: "foo"
