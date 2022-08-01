@@ -37,12 +37,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "plain",
-                  "oauthbearer",
-                  "digest",
-                  "mtls"
-                ]
+                "pattern": "^(plain|oauthbearer|digest|mtls)$"
               },
               "jaasConfig": {
                 "type": "object",
@@ -146,12 +141,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "plain",
-                  "oauthbearer",
-                  "digest",
-                  "mtls"
-                ]
+                "pattern": "^(plain|oauthbearer|digest|mtls)$"
               },
               "jaasConfig": {
                 "type": "object",
