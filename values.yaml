@@ -12,7 +12,7 @@ destinationCluster: {}
   #     enabled: true
   #     secretRef: source-tls-group1
 
-sourceCluster:
+sourceCluster: {}
   # kafkaRestClass:
   #   name: krc-example
   #   namespace: test
