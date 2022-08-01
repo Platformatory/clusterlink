@@ -73,4 +73,7 @@ spec:
   configs:
     {{- include "clusterlink.configs" . | nindent 4 }}
   {{- end }}
+  {{- if .Values.clusterLinkName }}
+  name: "{{ .Values.clusterLinkName }}"
+  {{- end }}
   

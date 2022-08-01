@@ -1,266 +1,367 @@
 {
-    "type": "object",
-    "$schema": "https://json-schema.org/schema#",
-    "required": [
-        "destinationCluster",
-        "sourceCluster"
+    "type":"object",
+    "$schema":"https://json-schema.org/schema#",
+    "required":[
+       "destinationCluster",
+       "sourceCluster"
     ],
-    "properties": {
-        "destinationCluster": {
-            "type": "object",
-            "properties": {
-                "kafkaRestClass": {
-                    "type": "object",
+    "properties":{
+       "destinationCluster":{
+          "type":"object",
+          "minProperties": 1,
+          "properties":{
+             "kafkaRestClass":{
+                "type":"object",
+                "minProperties": 1,
+                "properties":{
+                   "name":{
+                      "type":"string"
+                   },
+                   "namespace":{
+                      "type":"string"
+                   }
+                },
+                "required":[
+                   "name"
+                ]
+             },
+             "bootstrapEndpoint":{
+                "type":"string"
+             },
+             "clusterId":{
+                "type":"string"
+             },
+             "authentication":{
+                "type":"object",
+                "minProperties": 1,
+                "properties":{
+                   "type":{
+                      "type":"string",
+                      "enum":[
+                         "plain",
+                         "oauthbearer",
+                         "digest",
+                         "mtls"
+                      ]
+                   },
+                   "jaasConfig":{
+                      "type":"object",
+                      "minProperties": 1,
+                      "properties": {
+                        "secretRef": {"type": "string"}
+                      },
+                      "required": ["secretRef"]
+                   },
+                   "jaasConfigPassThrough":{
+                      "type":"object",
+                      "minProperties": 1,
+                      "properties": {
+                        "directoryPathInContainer": {"type": "string"},
+                        "secretRef": {"type": "string"}
+                      }
+                   },
+                   "oauthbearer":{
+                    "type":"object",
+                    "minProperties": 1,
                     "properties": {
-                        "name": {
-                            "type": "string"
+                      "directoryPathInContainer": {"type": "string"},
+                      "secretRef": {"type": "string"}
+                    }
+                 }
+                },
+                "required":[
+                   "type"
+                ]
+             },
+             "tls":{
+                "type":"object",
+                "minProperties": 1,
+                "properties":{
+                   "directoryPathInContainer":{
+                      "type":"string"
+                   },
+                   "enabled":{
+                      "type":"boolean"
+                   },
+                   "keyPassword":{
+                      "type":"object",
+                      
+                      "properties":{
+                         "secretRef":{
+                            "type":"string"
+                         }
+                      },
+                      "required":[
+                         "secretRef"
+                      ]
+                   },
+                   "secretRef":{
+                      "type":"string"
+                   }
+                },
+                "required":[
+                   "enabled"
+                ]
+             }
+          }
+        },
+        "sourceCluster":{
+             "type":"object",
+             "minProperties": 1,
+             "properties":{
+                "kafkaRestClass":{
+                   "type":"object",
+                   "properties":{
+                      "name":{
+                         "type":"string"
+                      },
+                      "namespace":{
+                         "type":"string"
+                      }
+                   },
+                   "required":[
+                      "name"
+                   ]
+                },
+                "bootstrapEndpoint":{
+                   "type":"string"
+                },
+                "clusterId":{
+                   "type":"string"
+                },
+                "authentication":{
+                   "type":"object",
+                   "minProperties": 1,
+                   "properties":{
+                      "type":{
+                         "type":"string",
+                         "enum":[
+                            "plain",
+                            "oauthbearer",
+                            "digest",
+                            "mtls"
+                         ]
+                      },
+                      "jaasConfig":{
+                        "type":"object",
+                        "minProperties": 1,
+                        "properties": {
+                          "secretRef": {"type": "string"}
                         },
-                        "namespace": {
-                            "type": "string"
+                        "required": ["secretRef"]
+                     },
+                     "jaasConfigPassThrough":{
+                        "type":"object",
+                        "minProperties": 1,
+                        "properties": {
+                          "directoryPathInContainer": {"type": "string"},
+                          "secretRef": {"type": "string"}
                         }
-                    },
-                    "required": [
-                        "name"
-                    ]
+                     },
+                     "oauthbearer":{
+                      "type":"object",
+                      "minProperties": 1,
+                      "properties": {
+                        "directoryPathInContainer": {"type": "string"},
+                        "secretRef": {"type": "string"}
+                      }
+                   }
+                  },
+                   "required":[
+                      "type"
+                   ]
                 },
-                "bootstrapEndpoint": {
-                    "type": "string"
-                },
-                "clusterId": {
-                    "type": "string"
-                },
-                "authentication": {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "enum": [
-                                "plain",
-                                "oauthbearer",
-                                "digest",
-                                "mtls"
-                            ]
-                        },
-                        "jaasConfig": {
-                            "type": "object"
-                        },
-                        "jaasConfigPassThrough": {
-                            "type": "object"
-                        },
-                        "oauthbearer": {
-                            "type": "object"
-                        }
-                    },
-                    "required": [
-                        "type"
-                    ]
-                },
-                "tls": {
-                    "type": "object",
-                    "properties": {
-                        "directoryPathInContainer": {
-                            "type": "string"
-                        },
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "keyPassword": {
-                            "type": "object",
-                            "properties": {
-                                "secretRef": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "secretRef"
-                            ]
-                        },
-                        "secretRef": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "enabled"
-                    ]
+                "tls":{
+                   "type":"object",
+                   "properties":{
+                      "directoryPathInContainer":{
+                         "type":"string"
+                      },
+                      "enabled":{
+                         "type":"boolean"
+                      },
+                      "keyPassword":{
+                         "type":"object",
+                         "properties":{
+                            "secretRef":{
+                               "type":"string"
+                            }
+                         },
+                         "required":[
+                            "secretRef"
+                         ]
+                      },
+                      "secretRef":{
+                         "type":"string"
+                      }
+                   },
+                   "required":[
+                      "enabled"
+                   ]
                 }
-            },
-            "sourceCluster": {
-                "type": "object",
-                "properties": {
-                    "kafkaRestClass": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            },
-                            "namespace": {
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "name"
-                        ]
-                    },
-                    "bootstrapEndpoint": {
-                        "type": "string"
-                    },
-                    "clusterId": {
-                        "type": "string"
-                    },
-                    "authentication": {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "type": "string",
-                                "enum": [
-                                    "plain",
-                                    "oauthbearer",
-                                    "digest",
-                                    "mtls"
-                                ]
-                            },
-                            "jaasConfig": {
-                                "type": "object"
-                            },
-                            "jaasConfigPassThrough": {
-                                "type": "object"
-                            },
-                            "oauthbearer": {
-                                "type": "object"
-                            }
-                        },
-                        "required": [
-                            "type"
-                        ]
-                    },
-                    "tls": {
-                        "type": "object",
-                        "properties": {
-                            "directoryPathInContainer": {
-                                "type": "string"
-                            },
-                            "enabled": {
-                                "type": "boolean"
-                            },
-                            "keyPassword": {
-                                "type": "object",
-                                "properties": {
-                                    "secretRef": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "secretRef"
-                                ]
-                            },
-                            "secretRef": {
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "enabled"
-                        ]
-                    }
-                },
-                "consumerGroupFilters": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name" : {"type": "string" },
-                            "patternType" : {"type": "string", "pattern": "^(PREFIXED|LITERAL)$" },
-                            "filterType" : {"type": "string", "pattern": "^(INCLUDE|EXCLUDE)$" }
-                        },
-                        "required": ["name", "patternType", "filterType"]
-                    }
-                },
-                "aclFilters": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "accessFilter" : {
-                                "type": "object",
-                                "properties": {
-                                    "host" : {"type": "string" },
-                                    "operation" : {"type": "string" },
-                                    "permissionType" : {"type": "string", "pattern": "^(any|allow|deny)$" },
-                                    "principal" : {"type": "string" }
-                                },
-                                "required": ["operation", "permissionType"]
-                            },
-                            "resourceFilter" : {
-                                "type": "object",
-                                "properties": {
-                                    "name" : {"type": "string" },
-                                    "patternType" : {"type": "string", "pattern": "^(prefixed|literal|any|match)$" },
-                                    "resourceType" : {"type": "string", "pattern": "^(any|cluster|group|topic|transactionId|delegationToken)$" }
-                                },
-                                "required": ["patternType", "resourceType"]
-                            }
-                        },
-                        "required": ["accessFilter", "resourceFilter"]
-                    }
-                },
-                "configs": {
-                    "type": "object"
-                },
-                "mirrorTopicOptions": {
-                    "type": "object",
-                    "items": {
-                        "prefix": {
-                            "type": "string"
-                        },
-                        "autoCreateTopics": {
-                            "type": "object",
-                            "properties": {
-                                "enabled": {"type": "boolean"},
-                                "topicFilters": {
-                                    "type": "array",
-                                    "name" : {"type": "string" },
-                                    "patternType" : {"type": "string", "pattern": "^(PREFIXED|LITERAL)$" },
-                                    "filterType" : {"type": "string", "pattern": "^(INCLUDE|EXCLUDE)$" }
-                                },
-                                "required": ["patternType", "filterType", "name"]
-                                }
-                            }
-                        }
-                    }
-                },
-                "mirrorTopics": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            },
-                            "config": {
-                                "type": "object"
-                            },
-                            "replicationFactor": {
-                                "type": "integer"
-                            },
-                            "sourceTopicName": {
-                                "type": "string"
-                            },
-                            "state": {
-                                "type": "string",
-                                "pattern": "^(ACTIVE|FAILOVER|PAUSE|PROMOTE)$"
-                            }
-                        },
-                        "required": [
-                            "name"
-                        ]
-                    }
-                },
-                "sourceInitiatedLink": {
-                    "type": "object",
-                    "properties": {
-                        "linkMode": {"type": "string", "pattern": "^(Source|Destination)$"}
-                    },
-                    "required": "linkMode"
+             }
+        },
+        "consumerGroupFilters":{
+                "type":"array",
+                "minItems": 1,
+                "items":{
+                   "type":"object",
+                   "properties":{
+                      "name":{
+                         "type":"string"
+                      },
+                      "patternType":{
+                         "type":"string",
+                         "pattern":"^(PREFIXED|LITERAL)$"
+                      },
+                      "filterType":{
+                         "type":"string",
+                         "pattern":"^(INCLUDE|EXCLUDE)$"
+                      }
+                   },
+                   "required":[
+                      "name",
+                      "patternType",
+                      "filterType"
+                   ]
                 }
-            }
-        }
-}
+             },
+             "aclFilters":{
+                "type":"array",
+                "minItems": 1,
+                "items":{
+                   "type":"object",
+                   "properties":{
+                      "accessFilter":{
+                         "type":"object",
+                         "properties":{
+                            "host":{
+                               "type":"string"
+                            },
+                            "operation":{
+                               "type":"string"
+                            },
+                            "permissionType":{
+                               "type":"string",
+                               "pattern":"^(any|allow|deny)$"
+                            },
+                            "principal":{
+                               "type":"string"
+                            }
+                         },
+                         "required":[
+                            "operation",
+                            "permissionType"
+                         ]
+                      },
+                      "resourceFilter":{
+                         "type":"object",
+                         "properties":{
+                            "name":{
+                               "type":"string"
+                            },
+                            "patternType":{
+                               "type":"string",
+                               "pattern":"^(prefixed|literal|any|match)$"
+                            },
+                            "resourceType":{
+                               "type":"string",
+                               "pattern":"^(any|cluster|group|topic|transactionId|delegationToken)$"
+                            }
+                         },
+                         "required":[
+                            "patternType",
+                            "resourceType"
+                         ]
+                      }
+                   },
+                   "required":[
+                      "accessFilter",
+                      "resourceFilter"
+                   ]
+                }
+             },
+             "configs":{
+                "type":"object",
+                "minProperties": 1
+             },
+             "mirrorTopicOptions":{
+                "type":"object",
+                "minProperties": 1,
+                "items":{
+                   "prefix":{
+                      "type":"string"
+                   },
+                   "autoCreateTopics":{
+                      "type":"object",
+                      "properties":{
+                         "enabled":{
+                            "type":"boolean"
+                         },
+                         "topicFilters":{
+                            "type":"array",
+                            "minItems": 1,
+                            "name":{
+                               "type":"string"
+                            },
+                            "patternType":{
+                               "type":"string",
+                               "pattern":"^(PREFIXED|LITERAL)$"
+                            },
+                            "filterType":{
+                               "type":"string",
+                               "pattern":"^(INCLUDE|EXCLUDE)$"
+                            }
+                         },
+                         "required":[
+                            "patternType",
+                            "filterType",
+                            "name"
+                         ]
+                      }
+                   }
+                }
+             },
+          "mirrorTopics":{
+             "type":"array",
+             "minItems": 1,
+             "items":{
+                "type":"object",
+                "properties":{
+                   "name":{
+                      "type":"string"
+                   },
+                   "configs":{
+                      "type":"object"
+                   },
+                   "replicationFactor":{
+                      "type":"integer"
+                   },
+                   "sourceTopicName":{
+                      "type":"string"
+                   },
+                   "state":{
+                      "type":"string",
+                      "pattern":"^(ACTIVE|FAILOVER|PAUSE|PROMOTE)$"
+                   }
+                },
+                "required":[
+                   "name"
+                ]
+             }
+          },
+          "sourceInitiatedLink":{
+             "type":"object",
+             "minProperties": 1,
+             "properties":{
+                "linkMode":{
+                   "type":"string",
+                   "pattern":"^(Source|Destination)$"
+                }
+             },
+             "required": ["linkMode" ]
+          },
+          "clusterLinkName": { "type" : "string" }
+       }
+    }
+ }

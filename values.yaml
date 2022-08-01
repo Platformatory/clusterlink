@@ -25,11 +25,11 @@ consumerGroupFilters: []
   #   patternType: LITERAL
   #   filterType: INCLUDE
 
-configs: {}
+# configs:
   # connections.max.idle.ms: "620000"
   # cluster.link.retry.timeout.ms: "320000"
 
-aclFilters: {}
+aclFilters: []
   # - resourceFilter:
   #     resourceType: topic
   #     name: coffee
@@ -56,5 +56,7 @@ mirrorTopicOptions: {}
   #       patternType: LITERAL
   # prefix: test
 
-sourceInitiatedLink: {}
-  # linkMode: "Source"
+sourceInitiatedLink:
+  linkMode: "Source"
+
+# clusterLinkName: "foo"
