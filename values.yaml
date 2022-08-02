@@ -1,62 +1,23 @@
-destinationCluster: {}
-  # kafkaRestClass:
-  #   name: krc-example
-  #   namespace: test
-  # bootstrapEndpoint: example.com:9092
-  # clusterId: test_kafka_cluster_id
-  # authentication:
-  #   type: plain
-  #   jaasConfig:
-  #     secretRef: credential
-  #   tls:
-  #     enabled: true
-  #     secretRef: source-tls-group1
-
-sourceCluster: {}
-  # kafkaRestClass:
-  #   name: krc-example
-  #   namespace: test
-  # bootstrapEndpoint: example.com:9092
-  # clusterId: test_kafka_cluster_id
-
-
-# consumerGroupFilters:
-#   - name: filter-example
-#     patternType: LITERAL
-#     filterType: INCLUDE
-
-# configs:
-  # connections.max.idle.ms: "620000"
-  # cluster.link.retry.timeout.ms: "320000"
-
-# aclFilters:
-  # - resourceFilter:
-  #     resourceType: topic
-  #     name: coffee
-  #     patternType: prefixed
-  #   accessFilter:
-  #     principal: User:Bob
-  #     host: example .com
-  #     operation: read
-  #     permissionType: allow
-
-# mirrorTopics:
-  # - name: testTopic
-  # - name: demo
-  #   replicationFactor: 3
-  #   sourceTopicName: demo
-  #   state: "ACTIVE"
-
-# mirrorTopicOptions:
-  # autoCreateTopics:
-  #   enabled: true
-  #   topicFilters:
-  #     - name: foo
-  #       filterType: EXCLUDE
-  #       patternType: LITERAL
-  # prefix: test
-
-# sourceInitiatedLink:
-#   linkMode: "Source"
-
-# clusterLinkName: "foo"
+spec: {}
+  # destinationKafkaCluster:
+  #   kafkaRestClassRef:
+  #     name: krc-example
+  # sourceKafkaCluster:
+  #   bootstrapEndpoint: example.com:9092
+  #   clusterID: test_kafka_cluster_id
+  # consumerGroupFilters:
+  #   - name: filter-example
+  #     patternType: LITERAL
+  #     filterType: INCLUDE
+  # aclFilters:
+  #     - resourceFilter:
+  #         resourceType: topic
+  #         name: coffee
+  #         patternType: prefixed
+  #       accessFilter:
+  #         principal: User:Bob
+  #         host: example .com
+  #         operation: read
+  #         permissionType: allow
+  # configs:
+  #   connections.max.idle.ms: "620000"
